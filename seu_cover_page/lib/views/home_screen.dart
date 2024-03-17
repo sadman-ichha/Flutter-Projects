@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';
 import 'package:seu_cover_page/utils/screen_size.dart';
 import 'package:seu_cover_page/utils/themes/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,11 +103,21 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 10.0),
-                    Expanded(
-                      child: 
-                    ),
+                    // Expanded(
+                    //   child:
+                    // ),
                   ],
                 ),
+                ElevatedButton(
+                    onPressed: () async {
+                      DateTime? newDateTime = await showRoundedDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(DateTime.now().year - 1),
+                          lastDate: DateTime(DateTime.now().year + 1),
+                          borderRadius: 16);
+                    },
+                    child: Text("data")),
               ],
             ),
           ),

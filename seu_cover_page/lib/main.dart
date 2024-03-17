@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_cover_page/routes/app_pages.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'utils/screen_size.dart';
 
 void main() {
@@ -17,6 +18,17 @@ class MyApp extends StatelessWidget {
     ScreenSize.init(context);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        DefaultCupertinoLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: const Locale('en', 'US'),
+      supportedLocales: const [
+        Locale('en', 'US'), // English
+        Locale('bn', 'BD'), // Bangla
+      ],
       title: 'SEU Cover Page',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
