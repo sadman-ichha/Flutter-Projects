@@ -8,7 +8,7 @@ import 'package:seu_cover_page/utils/screen_size.dart';
 import 'package:seu_cover_page/utils/themes/app_colors.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -137,42 +137,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(width: 10.0),
                     Expanded(
-                      child: SizedBox(
-                        height: 60.0,
-                        child: Obx(
-                          () => TextField(
-                            onTap: () => showDatePicker(context),
-                            controller: TextEditingController(
-                              text: selectedDate.value != null
-                                  ? DateFormat('dd-MM-yyyy')
-                                      .format(selectedDate.value!)
-                                  : '', // Set the text based on selected date
-                            ),
-                            readOnly: true,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Date",
-                              prefixIcon: Icon(Icons.calendar_month),
-                              prefixIconConstraints:
-                                  BoxConstraints(minWidth: 40),
-                              suffixIcon: Icon(Icons.info),
-                              suffixIconConstraints:
-                                  BoxConstraints(minWidth: 40),
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 12),
-                            ),
+                      child: Obx(
+                        () => TextField(
+                          onTap: () => showDatePicker(context),
+                          controller: TextEditingController(
+                            text: selectedDate.value != null
+                                ? DateFormat('dd-MM-yyyy')
+                                    .format(selectedDate.value!)
+                                : '', // Set the text based on selected date
+                          ),
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Date",
+                            prefixIcon: Icon(Icons.calendar_month),
+                            prefixIconConstraints: BoxConstraints(minWidth: 40),
+                            suffixIcon: Icon(Icons.info),
+                            suffixIconConstraints: BoxConstraints(minWidth: 40),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 12),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Show date and time picker
-                  },
-                  child: const Text("Select Date"),
-                ),
+                
               ],
             ),
           ),
