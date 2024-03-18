@@ -1,46 +1,22 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart'; // Import DateFormat
+import 'package:intl/intl.dart';
+import 'package:seu_cover_page/components/custom_dropdown.dart';
+import 'package:seu_cover_page/components/custom_textfield.dart';
+import 'package:seu_cover_page/controllers/home_sereen_controller.dart';
 import 'package:seu_cover_page/utils/screen_size.dart';
 import 'package:seu_cover_page/utils/themes/app_colors.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
-
-  // TimeOfDay? selectedTime;
-
-  // final selectedDate = DateTime.now().obs;
-  // final Rx<TextEditingController> dateController =
-  //     TextEditingController(text: selectedDate.value != null
-  //                           ? 'Selected Date: ${DateFormat('yyyy-MM-dd').format(selectedDate.value!)}'
-  //                           : 'No date selected',).obs;
-
-  Future<void> showDatePicker(BuildContext context) async {
-    final newDateTime = await showRoundedDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(DateTime.now().year - 1),
-      lastDate: DateTime(DateTime.now().year + 1),
-      borderRadius: 16,
-    );
-
-    if (newDateTime != null) {
-      selectedDate.value = newDateTime;
-    }
-  }
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+  // final selectedValue = 'Assignment'.obs; // Initial value
+  // final RxList<String> dropDownItems = ['Assignment', 'Lab Report'].obs;
 
   @override
   Widget build(BuildContext context) {
+    HomeScreenController homeController = Get.put(HomeScreenController());
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -59,19 +35,25 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 SizedBox(height: ScreenSize.screenSize.height * 0.03),
-                CustomDropdownButton(),
+                //CustomDropdownButton(),
+                CustomDropdownButton(
+                  items: homeController.dropDownItems,
+                  selectedItem: homeController.selectedValue,
+                ),
                 SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                const Row(
+                Row(
                   children: [
                     Expanded(
                       child: CustomTextField(
+                        controller: homeController.courseTitleController,
                         labelText: 'Course Title',
                         hintText: 'Computer Fundamentals',
                       ),
                     ),
-                    SizedBox(width: 10.0),
+                    const SizedBox(width: 10.0),
                     Expanded(
                       child: CustomTextField(
+                        controller: homeController.courseCodeController,
                         labelText: 'Course Code',
                         hintText: 'CSE141',
                       ),
@@ -79,28 +61,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                const CustomTextField(
+                CustomTextField(
+                  controller: homeController.assignmentTitleController,
                   labelText: 'Assignment Title',
                   hintText: 'Assignment Title',
                 ),
                 SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                CustomDropdownButton(),
+                CustomTextField(
+                  controller: homeController.teacherNameController,
+                  labelText: 'Faculty name',
+                  hintText: 'e.g: Anawer Parves',
+                ),
+                SizedBox(height: ScreenSize.screenSize.height * 0.02),
+                CustomDropdownButton(
+                  items: homeController.dropDownDepartmentItems,
+                  selectedItem: homeController.selectedDepartmentValue,
+                ),
                 SizedBox(height: ScreenSize.screenSize.height * 0.02),
                 const Divider(
                   color: AppColors.primaryColor,
                 ),
                 SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                const Row(
+                Row(
                   children: [
                     Expanded(
                       child: CustomTextField(
+                        controller: homeController.nameController,
                         labelText: 'Student Name',
                         hintText: 'Sadman Esha',
                       ),
                     ),
-                    SizedBox(width: 10.0),
+                    const SizedBox(width: 10.0),
                     Expanded(
                       child: CustomTextField(
+                        controller: homeController.idController,
                         labelText: 'ID',
                         hintText: '2022200010017',
                       ),
@@ -108,17 +102,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                const Row(
+                Row(
                   children: [
                     Expanded(
                       child: CustomTextField(
+                        controller: homeController.sectionController,
                         labelText: 'Section',
                         hintText: '5',
                       ),
                     ),
-                    SizedBox(width: 10.0),
+                    const SizedBox(width: 10.0),
                     Expanded(
                       child: CustomTextField(
+                        controller: homeController.departmentController,
                         labelText: 'Department',
                         hintText: 'CSE',
                       ),
@@ -129,8 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: CustomTextField(
+                        controller: homeController.semesterController,
                         labelText: 'Semester',
                         hintText: 'Fall 2024',
                       ),
@@ -139,11 +136,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: Obx(
                         () => TextField(
-                          onTap: () => showDatePicker(context),
+                          onTap: () => homeController.showDatePicker(context),
                           controller: TextEditingController(
-                            text: selectedDate.value != null
+                            text: homeController.selectedDate.value != null
                                 ? DateFormat('dd-MM-yyyy')
-                                    .format(selectedDate.value!)
+                                    .format(homeController.selectedDate.value!)
                                 : '', // Set the text based on selected date
                           ),
                           readOnly: true,
@@ -162,75 +159,39 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                
+                SizedBox(height: ScreenSize.screenSize.height * 0.05),
+                InkWell(
+                  onTap: () {
+                    // Add your onTap functionality here
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.amberAccent,
+                        width: 3.0,
+                      ),
+                      //color: Colors.red,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    padding: const EdgeInsets.all(
+                        12.0), // Add padding to the container
+                    child: const Text(
+                      'PDF Generate',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    Key? key,
-    required this.labelText,
-    required this.hintText,
-  }) : super(key: key);
-
-  final String labelText;
-  final String hintText;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 53.0,
-      child: TextField(
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(),
-          hintText: hintText,
-          hintStyle: const TextStyle(
-            fontWeight: FontWeight.w300,
-          ),
-          labelText: labelText,
-        ),
-      ),
-    );
-  }
-}
-
-class CustomDropdownButton extends StatelessWidget {
-  CustomDropdownButton({Key? key}) : super(key: key);
-
-  final RxList<String> dropDownItems = ['Assignment', 'Lab Report'].obs;
-  final selectedValue = 'Assignment'.obs; // Initial value
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
-      isExpanded: true,
-      value: selectedValue.value,
-      onChanged: (String? newValue) {
-        selectedValue.value = newValue!;
-      },
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-      ),
-      style: const TextStyle(
-        color: Colors.black,
-        fontSize: 16,
-      ),
-      elevation: 16,
-      items: dropDownItems.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(value),
-          ),
-        );
-      }).toList(),
     );
   }
 }
