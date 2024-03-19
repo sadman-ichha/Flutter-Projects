@@ -28,6 +28,13 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: AppColors.primaryColor,
       ),
+      drawer: Container(
+        height: ScreenSize.screenSize.height / 2,
+        width: ScreenSize.screenSize.width / 1.3,
+        decoration: BoxDecoration(
+          color: Colors.amberAccent.shade400,
+        ),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
