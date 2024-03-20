@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_cover_page/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'controllers/cover_page_screen_controller.dart';
 import 'utils/screen_size.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(CoverPageScreenController());
     // Initialize screen size
     ScreenSize.init(context);
     return GetMaterialApp(

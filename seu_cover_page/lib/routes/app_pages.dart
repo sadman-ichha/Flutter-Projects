@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:seu_cover_page/routes/app_routes.dart';
+import 'package:seu_cover_page/views/cover_page.dart';
 import 'package:seu_cover_page/views/home_screen.dart';
 import 'package:seu_cover_page/views/splash_screen.dart';
 
@@ -14,7 +15,11 @@ class AppPages {
     ),
     GetPage(
       name: Routes.HOME,
-      page: () =>  HomeScreen(),
+      page: () => const HomeScreen(),
+    ),
+    GetPage(
+      name: Routes.COVER,
+      page: () => const CoverPageScreen(),
     ),
   ];
 }

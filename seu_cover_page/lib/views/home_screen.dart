@@ -1,11 +1,13 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:seu_cover_page/components/app_drawer.dart';
 import 'package:seu_cover_page/components/custom_dropdown.dart';
 import 'package:seu_cover_page/components/custom_textfield.dart';
 import 'package:seu_cover_page/controllers/home_sereen_controller.dart';
+import 'package:seu_cover_page/routes/app_routes.dart';
 import 'package:seu_cover_page/utils/screen_size.dart';
 import 'package:seu_cover_page/utils/themes/app_colors.dart';
 
@@ -28,13 +30,7 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: AppColors.primaryColor,
       ),
-      drawer: Container(
-        height: ScreenSize.screenSize.height / 2,
-        width: ScreenSize.screenSize.width / 1.3,
-        decoration: BoxDecoration(
-          color: Colors.amberAccent.shade400,
-        ),
-      ),
+      drawer: MyDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -42,7 +38,6 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: ScreenSize.screenSize.height * 0.03),
-                //CustomDropdownButton(),
                 CustomDropdownButton(
                   items: homeController.dropDownItems,
                   selectedItem: homeController.selectedValue,
@@ -170,6 +165,7 @@ class HomeScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     // Add your onTap functionality here
+                    Get.toNamed(Routes.COVER);
                   },
                   child: Container(
                     width: double.infinity,
@@ -181,8 +177,7 @@ class HomeScreen extends StatelessWidget {
                       //color: Colors.red,
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    padding: const EdgeInsets.all(
-                        12.0), // Add padding to the container
+                    padding: const EdgeInsets.all(12.0),
                     child: const Text(
                       'PDF Generate',
                       textAlign: TextAlign.center,
