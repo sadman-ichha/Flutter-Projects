@@ -23,8 +23,8 @@ class CoverPageScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-            final data = await CoverPageScreenController().generateCoverPDF();
-            CoverPageScreenController().savePdfFile("Sadman", data);
+            final data = await CoverPageScreenController().saveAndOpenInvoice();
+        //CoverPageScreenController().saveAndOpenPdf();
           },
           child: const Text('Generate and Save PDF'),
         ),
