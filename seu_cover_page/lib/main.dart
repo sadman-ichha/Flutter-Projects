@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_cover_page/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'controllers/cover_page_screen_controller.dart';
+import 'components/coverpage_all_component.dart';
 import 'utils/screen_size.dart';
 
 void main() {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         DefaultCupertinoLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate ,
+        GlobalCupertinoLocalizations.delegate,
       ],
       locale: const Locale('en', 'US'),
       supportedLocales: const [

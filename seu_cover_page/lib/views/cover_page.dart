@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:seu_cover_page/controllers/cover_page_screen_controller.dart';
+import 'package:printing/printing.dart';
+import 'package:seu_cover_page/components/coverpage_all_component.dart';
 import 'package:seu_cover_page/utils/themes/app_colors.dart';
 
 class CoverPageScreen extends StatelessWidget {
@@ -8,7 +9,11 @@ class CoverPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Get.put(() => CoverPageScreenController());
+    // Get.put(() => CoverPageScreenController());
+    final actions = <PdfPreviewAction>[
+      if (kIsWeb)
+        const PdfPreviewAction(icon: Icon(Icons.save), onPressed: saveAsFile),
+    ];
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -20,14 +25,12 @@ class CoverPageScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: AppColors.primaryColor,
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            final data = await CoverPageScreenController().saveAndOpenInvoice();
-        //CoverPageScreenController().saveAndOpenPdf();
-          },
-          child: const Text('Generate and Save PDF'),
-        ),
+      body: PdfPreview(
+        maxPageWidth: 700.0,
+        actions: actions,
+        onPrinted: showPrintedToast(),
+        onShared: showSharedToast(),
+        build: generatePDF,
       ),
     );
   }
