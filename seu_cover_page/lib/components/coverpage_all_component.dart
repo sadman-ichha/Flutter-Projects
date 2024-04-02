@@ -7,10 +7,15 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
 import 'package:printing/printing.dart';
+import 'package:seu_cover_page/components/rich_text_cover_page.dart';
+import 'package:seu_cover_page/utils/themes/app_images.dart';
 
 Future<Uint8List> generatePDF(final PdfPageFormat format) async {
   // Create a PDF document
   final pdf = pw.Document();
+  // Load image from asset
+  final ByteData seuLogoData = await rootBundle.load(AppImages.seuLogo);
+  final Uint8List bytes = seuLogoData.buffer.asUint8List();
 
   // Add a page to the PDF
   pdf.addPage(
@@ -18,56 +23,175 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
       build: (pw.Context context) {
         // Add invoice content
         return pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          crossAxisAlignment: pw.CrossAxisAlignment.center,
+          mainAxisAlignment: pw.MainAxisAlignment.center,
           children: [
+            pw.Center(
+              child: pw.Container(
+                height: 130.0,
+                alignment: pw.Alignment.center,
+                child: pw.Image(pw.MemoryImage(bytes)),
+              ),
+            ),
+            pw.SizedBox(height: 20),
+
             // Invoice header
-            pw.Text(
-              'Invoice',
-              style: pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold),
+            pw.Center(
+              child: pw.Text(
+                'Southeast University',
+                style: pw.TextStyle(
+                  fontSize: 38,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
             ),
             pw.SizedBox(height: 20),
-
-            // Invoice details
-            pw.Row(
-              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-              children: [
-                pw.Text('Invoice Number:'),
-                pw.Text('INV-2024001'),
-              ],
-            ),
-            pw.Row(
-              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-              children: [
-                pw.Text('Date:'),
-                pw.Text(DateTime.now().toString()),
-              ],
-            ),
-            pw.SizedBox(height: 20),
-
-            // Invoice items
             pw.Text(
-              'Items:',
-              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+              'Assignment',
+              style: pw.TextStyle(
+                fontSize: 30,
+                fontWeight: pw.FontWeight.bold,
+              ),
             ),
             pw.SizedBox(height: 10),
-            pw.Table.fromTextArray(
-              context: context,
-              data: <List<String>>[
-                <String>['Item', 'Quantity', 'Price'],
-                <String>['Item 1', '2', '\$10'],
-                <String>['Item 2', '1', '\$20'],
-                <String>['Item 3', '3', '\$15'],
-              ],
+            pw.Padding(
+              padding: const pw.EdgeInsets.symmetric(horizontal: 70.0),
+              child: pw.Divider(thickness: 1.0),
             ),
 
+            pw.SizedBox(height: 15),
+            PdfRichText(
+              title: "Title: ",
+              titleTextStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+              dynamicText: "Assignment 1",
+              textStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+            ),
+            // Course title
             pw.SizedBox(height: 20),
+            PdfRichText(
+              title: "Course Title: ",
+              dynamicText: "Algorithm",
+              textStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+              titleTextStyle: const pw.TextStyle(fontSize: 22.0),
+            ),
 
-            // Total amount
-            pw.Row(
-              mainAxisAlignment: pw.MainAxisAlignment.end,
-              children: [
-                pw.Text('Total Amount: \$65'),
-              ],
+            PdfRichText(
+              title: "Course Code: ",
+              titleTextStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+              dynamicText: "CSE 161",
+              textStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+            ),
+            pw.SizedBox(height: 20),
+            // Submitted Too
+            pw.Text(
+              'Submitted To',
+              style: pw.TextStyle(
+                fontSize: 25.0,
+                fontWeight: pw.FontWeight.bold,
+                color: PdfColors.blue,
+              ),
+            ),
+            pw.SizedBox(height: 5.0),
+            pw.Text(
+              'Anawer Perves',
+              style: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+            ),
+            pw.Text(
+              'Lecturer, SEU',
+              style: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+            ),
+            pw.SizedBox(height: 20),
+            // Submitted by
+            pw.Text(
+              'Submitted By',
+              style: pw.TextStyle(
+                fontSize: 25,
+                fontWeight: pw.FontWeight.bold,
+                color: PdfColors.blue,
+              ),
+            ),
+            pw.SizedBox(height: 5.0),
+            PdfRichText(
+              title: "Name: ",
+              titleTextStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+              dynamicText: "Md. Safi Sadman Esha",
+              textStyle: pw.TextStyle(
+                fontSize: 22.0,
+                fontWeight: pw.FontWeight.normal,
+              ),
+            ),
+            PdfRichText(
+              title: "ID: ",
+              titleTextStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+              dynamicText: "2022200010017",
+              textStyle: const pw.TextStyle(fontSize: 22.0),
+            ),
+            PdfRichText(
+              title: "Section: ",
+              titleTextStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+              dynamicText: "16",
+              textStyle: const pw.TextStyle(fontSize: 22.0),
+            ),
+            PdfRichText(
+              title: "Semester: ",
+              titleTextStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+              dynamicText: "FALL 2024",
+              textStyle: const pw.TextStyle(fontSize: 22.0),
+            ),
+            PdfRichText(
+              title: "Department: ",
+              titleTextStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+              dynamicText: "CSE",
+              textStyle: const pw.TextStyle(fontSize: 22.0),
+            ),
+
+            pw.Spacer(),
+
+            // Submitted by
+            PdfRichText(
+              title: "Submission Date: ",
+              titleTextStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
+              dynamicText: "26/04/2024",
+              textStyle: const pw.TextStyle(fontSize: 22.0),
             ),
           ],
         );
@@ -89,7 +213,7 @@ Future<void> saveAsFile(
   final appDocPath = appDocDir.path;
   final path = '$appDocPath/assignment.pdf';
   final file = File(path);
-  print("Frint as Pdf: ${file.path}...............");
+  print("Print as Pdf: ${file.path}...............");
   await file.writeAsBytes(bytes);
   await OpenFile.open(file.path);
 }
