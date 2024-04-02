@@ -9,13 +9,13 @@ class HomeScreenController extends GetxController {
   final RxList<String> dropDownDepartmentItems = [
     'CSE',
     'EEE',
-    'Pharmacy',
-    'English',
-    'Law',
-    'Bangla',
-    'Textile',
-    'Architecture',
-    'Economics',
+    'PHARMACY',
+    'ENGLISH',
+    'LAW',
+    'BANGLA',
+    'TEXTILE',
+    'ARCHITECHTURE',
+    'ECONOMICS',
     'BBA',
   ].obs;
   final Rx<DateTime?> selectedDate = Rx<DateTime?>(null);

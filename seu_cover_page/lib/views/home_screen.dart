@@ -141,7 +141,7 @@ class HomeScreen extends StatelessWidget {
                           onTap: () => homeController.showDatePicker(context),
                           controller: TextEditingController(
                             text: homeController.selectedDate.value != null
-                                ? DateFormat('dd-MM-yyyy')
+                                ? DateFormat('dd/MM/yyyy')
                                     .format(homeController.selectedDate.value!)
                                 : '', // Set the text based on selected date
                           ),

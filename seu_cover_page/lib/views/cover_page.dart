@@ -16,8 +16,8 @@ class CoverPageScreen extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Assignment Cover Page',
+        title: Text(
+          '${homeController.selectedValue.value.toString()} Cover Page',
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),

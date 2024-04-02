@@ -8,7 +8,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
 import 'package:printing/printing.dart';
 import 'package:seu_cover_page/components/rich_text_cover_page.dart';
+import 'package:seu_cover_page/controllers/home_sereen_controller.dart';
 import 'package:seu_cover_page/utils/themes/app_images.dart';
+
+HomeScreenController homeController = Get.put(HomeScreenController());
 
 Future<Uint8List> generatePDF(final PdfPageFormat format) async {
   // Create a PDF document
@@ -47,7 +50,8 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
             ),
             pw.SizedBox(height: 20),
             pw.Text(
-              'Assignment',
+              // 'Assignment',
+              homeController.selectedValue.value.toString(),
               style: pw.TextStyle(
                 fontSize: 30,
                 fontWeight: pw.FontWeight.bold,
@@ -66,7 +70,9 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
               ),
-              dynamicText: "Assignment 1",
+              //dynamicText: "Assignment 1",
+              dynamicText:
+                  homeController.assignmentTitleController.text.toString(),
               textStyle: pw.TextStyle(
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
@@ -76,7 +82,8 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
             pw.SizedBox(height: 20),
             PdfRichText(
               title: "Course Title: ",
-              dynamicText: "Algorithm",
+              //  dynamicText: "Algorithm",
+              dynamicText: homeController.courseTitleController.text.toString(),
               textStyle: pw.TextStyle(
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
@@ -90,7 +97,8 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
               ),
-              dynamicText: "CSE 161",
+              //dynamicText: "CSE 161",
+              dynamicText: homeController.courseCodeController.text.toString(),
               textStyle: pw.TextStyle(
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
@@ -108,14 +116,16 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
             ),
             pw.SizedBox(height: 5.0),
             pw.Text(
-              'Anawer Perves',
+              // 'Anawer Perves',
+              homeController.teacherNameController.text.toString(),
               style: pw.TextStyle(
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
               ),
             ),
             pw.Text(
-              'Lecturer, SEU',
+              // 'Lecturer, SEU',
+              "Lecturer, SEU, ${homeController.selectedDepartmentValue.toString()}",
               style: pw.TextStyle(
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
@@ -138,7 +148,8 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
               ),
-              dynamicText: "Md. Safi Sadman Esha",
+              // dynamicText: "Md. Safi Sadman Esha",
+              dynamicText: homeController.nameController.text.toString(),
               textStyle: pw.TextStyle(
                 fontSize: 22.0,
                 fontWeight: pw.FontWeight.normal,
@@ -150,7 +161,8 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
               ),
-              dynamicText: "2022200010017",
+              //dynamicText: "2022200010017",
+              dynamicText: homeController.idController.text.toString(),
               textStyle: const pw.TextStyle(fontSize: 22.0),
             ),
             PdfRichText(
@@ -159,7 +171,8 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
               ),
-              dynamicText: "16",
+              //dynamicText: "16",
+              dynamicText: homeController.sectionController.text.toString(),
               textStyle: const pw.TextStyle(fontSize: 22.0),
             ),
             PdfRichText(
@@ -168,7 +181,8 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
               ),
-              dynamicText: "FALL 2024",
+              //dynamicText: "FALL 2024",
+              dynamicText: homeController.semesterController.text.toString(),
               textStyle: const pw.TextStyle(fontSize: 22.0),
             ),
             PdfRichText(
@@ -177,7 +191,8 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
               ),
-              dynamicText: "CSE",
+              //dynamicText: "CSE",
+              dynamicText: homeController.departmentController.text.toString(),
               textStyle: const pw.TextStyle(fontSize: 22.0),
             ),
 
@@ -190,7 +205,8 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 fontSize: 22.0,
                 font: pw.Font.helveticaBold(),
               ),
-              dynamicText: "26/04/2024",
+              // dynamicText: "26/04/2024",
+              dynamicText: homeController.selectedDate.value.toString(),
               textStyle: const pw.TextStyle(fontSize: 22.0),
             ),
           ],
