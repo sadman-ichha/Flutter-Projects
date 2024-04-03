@@ -18,6 +18,7 @@ class HomeScreenController extends GetxController {
     'ECONOMICS',
     'BBA',
   ].obs;
+  
   final Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
   Future<void> showDatePicker(BuildContext context) async {

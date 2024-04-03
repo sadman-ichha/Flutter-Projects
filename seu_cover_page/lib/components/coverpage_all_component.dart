@@ -19,6 +19,7 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
   // Load image from asset
   final ByteData seuLogoData = await rootBundle.load(AppImages.seuLogo);
   final Uint8List bytes = seuLogoData.buffer.asUint8List();
+  //final homeController.selectedDate.value! homeController.selectedDate.value! = homeController.selectedDate.value!;
 
   // Add a page to the PDF
   pdf.addPage(
@@ -206,8 +207,13 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 font: pw.Font.helveticaBold(),
               ),
               // dynamicText: "26/04/2024",
-              dynamicText: homeController.selectedDate.value.toString(),
-              textStyle: const pw.TextStyle(fontSize: 22.0),
+              dynamicText: homeController.selectedDate.value == null
+                  ? ""
+                  : "${homeController.selectedDate.value!.day.toString()}/${homeController.selectedDate.value!.month.toString()}/${homeController.selectedDate.value!.year.toString()}",
+              textStyle: pw.TextStyle(
+                fontSize: 22.0,
+                font: pw.Font.helveticaBold(),
+              ),
             ),
           ],
         );
@@ -229,9 +235,10 @@ Future<void> saveAsFile(
   final appDocPath = appDocDir.path;
   final path = '$appDocPath/assignment.pdf';
   final file = File(path);
-  print("Print as Pdf: ${file.path}...............");
+  print("Print as Pdf:.... ${file.path}...............");
   await file.writeAsBytes(bytes);
   await OpenFile.open(file.path);
+  print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 }
 
 showPrintedToast() {

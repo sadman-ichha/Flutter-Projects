@@ -1,4 +1,3 @@
-// ignore_for_file: unnecessary_null_comparison, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,7 +29,7 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: AppColors.primaryColor,
       ),
-      drawer: MyDrawer(),
+      drawer:const MyDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
