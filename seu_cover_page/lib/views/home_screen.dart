@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -29,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: AppColors.primaryColor,
       ),
-      drawer:const MyDrawer(),
+      drawer: const MyDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
