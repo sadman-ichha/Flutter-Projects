@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seu_cover_page/controllers/theme_controller.dart';
 import 'package:seu_cover_page/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'components/coverpage_all_component.dart';
 import 'utils/screen_size.dart';
 
 void main() {
@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(CoverPageScreenController());
+    final ThemeController themeController = Get.put(ThemeController());
+
     // Initialize screen size
     ScreenSize.init(context);
     return GetMaterialApp(
@@ -32,12 +33,17 @@ class MyApp extends StatelessWidget {
         Locale('bn', 'BD'), // Bangla
       ],
       title: 'SEU Cover Page',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      //   useMaterial3: true,
+      // ),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: themeController.themeMode == ThemeModeType.dark
+          ? ThemeMode.dark
+          : ThemeMode.light,
     );
   }
 }

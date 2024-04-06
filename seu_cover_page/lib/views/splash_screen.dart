@@ -31,7 +31,7 @@ class SplashScreen extends StatelessWidget {
             SizedBox(height: ScreenSize.screenSize.height * 0.02),
             // Using ResponsiveText widget
             const ResponsiveText(
-              text: "Assignment Cover Page Generator",
+              text: "SEU Cover Page Generator",
               style: TextStyle(
                 fontWeight: FontWeight.w600,
               ),

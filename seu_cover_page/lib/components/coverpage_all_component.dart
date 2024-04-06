@@ -249,65 +249,12 @@ Future<void> saveAsFile(
   print("Print as Pdf:.... ${file.path}...............");
   await file.writeAsBytes(bytes);
   await OpenFile.open(file.path);
-  print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 }
 
 showPrintedToast() {
-  // Show the Snackbar
-  Get.snackbar(
-    'Snackbar',
-    'Document Printed Successfully', // Message of the Snackbar
-    // duration: Duration(
-    //     seconds: 3),
-    snackPosition: SnackPosition.BOTTOM, // Position of the Snackbar
-    // backgroundColor: Colors.blue, // Background color of the Snackbar
-    // colorText: Colors.white, // Text color of the Snackbar
-    // borderRadius: 10, // Border radius of the Snackbar
-    // margin: EdgeInsets.all(10), // Margin around the Snackbar
-    // padding: EdgeInsets.all(20), // Padding inside the Snackbar
-    // animationDuration:
-    //     Duration(milliseconds: 500), // Duration of the animation
-    // // animationCurve: Curves.easeInOut, // Animation curve
-    // isDismissible:
-    //     true, // Whether the Snackbar can be dismissed by tapping outside
-    // //  dismissDirection: SnackDismissDirection.HORIZONTAL, // Direction to dismiss the Snackbar
-    // forwardAnimationCurve:
-    //     Curves.fastOutSlowIn, // Animation curve for forward direction
-    // reverseAnimationCurve:
-    //     Curves.easeOut, // Animation curve for reverse direction
-    // overlayBlur: 5, // Blur amount of the overlay
-    // overlayColor: Colors.black.withOpacity(0.5), // Color of the overlay
-    // snackStyle: SnackStyle.FLOATING, // Style of the Snackbar
-    // barBlur: 10, // Blur amount of the Snackbar
-    // // barBlurRadius: 10, // Blur radius of the Snackbar
-    // icon: Icon(Icons.info), // Icon of the Snackbar
-    // shouldIconPulse: true, // Whether the icon should pulse
-    // mainButton: TextButton(
-    //   onPressed: () {
-    //     Get.back(); // Dismiss the Snackbar when the main button is pressed
-    //   },
-    //   child: Text('Close'), // Label for the main button
-    // ),
-    // onTap: (_) {
-    //   Get.back(); // Dismiss the Snackbar when tapped
-    // },
-  );
+  Get.snackbar("Print", "Document Print Successfully");
 }
 
 showSharedToast() {
-  Get.snackbar("Shared", "Document Shared Successfully");
-}
-
-class CoverPageScreenController {
-  // Future<void> savePdfFile(String fileName, Uint8List byteList) async {
-  //   final output = await getTemporaryDirectory();
-  //   var filePath = "${output.path}/$fileName.pdf";
-  //   final file = File(filePath);
-  //   await file.writeAsBytes(byteList);
-  //   await OpenFile.open(filePath);
-  // }
-
-  // void showPrintedToast(final BuildContext context) {
-  //   Get.showSnackbar();
-  // }
+  Get.snackbar("Share", "Document Shared Successfully");
 }
