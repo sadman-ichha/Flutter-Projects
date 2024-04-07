@@ -28,26 +28,48 @@ class HomeScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.0),
         ),
         centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
+        //backgroundColor: AppColors.primaryColor,
         actions: [
           // Add download button to the AppBar
           Obx(
             () => IconButton(
-              icon: themeController.themeMode == ThemeModeType.dark
+              icon: homeController.isDarkMode.value == true
                   ? const Icon(Icons.light_mode)
                   : const Icon(Icons.dark_mode),
               onPressed: () {
-                themeController.toggleTheme();
+                // themeController.toggleTheme();
+                homeController.changeTheme();
               },
             ),
           ),
 
-          Obx(() => Switch(
-            value: themeController.themeMode == ThemeModeType.dark,
-            onChanged: (value) {
-              themeController.toggleTheme();
-            },
-          ),)
+          // Obx(
+          //   () => Switch(
+          //     value: themeController.themeMode == ThemeModeType.dark,
+          //     onChanged: (value) {
+          //       themeController.toggleTheme();
+          //     },
+          //   ),
+          // ),
+
+          // GetBuilder<HomeScreenController>(
+          //   builder: (_) => Switch(
+          //     value: homeController.isDark,
+          //     onChanged: (state) {
+          //       homeController.changeTheme(state);
+          //       print("printttttttttttttt ${state}");
+          //     },
+          //   ),
+          // ),
+
+          Obx(() {
+            return Switch(
+              value: homeController.isDarkMode.value,
+              onChanged: (value) {
+                homeController.changeTheme();
+              },
+            );
+          }),
         ],
       ),
       drawer: const MyDrawer(),

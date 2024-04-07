@@ -18,9 +18,9 @@ class HomeScreenController extends GetxController {
     'ECONOMICS',
     'BBA',
   ].obs;
-  
-  final Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
+  // Show Date and Time Piker Function..
+  final Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
   Future<void> showDatePicker(BuildContext context) async {
     final newDateTime = await showRoundedDatePicker(
       context: context,
@@ -46,4 +46,24 @@ class HomeScreenController extends GetxController {
   final TextEditingController sectionController = TextEditingController();
   final TextEditingController departmentController = TextEditingController();
   final TextEditingController semesterController = TextEditingController();
+
+  // var isDark = false;
+  // void changeTheme(state) {
+  //   if (state == true) {
+  //     isDark = true;
+  //     Get.changeTheme(ThemeData.dark());
+  //   } else {
+  //     isDark = false;
+  //     Get.changeTheme(ThemeData.light());
+  //   }
+  //   update();
+  // }
+
+
+  var isDarkMode = false.obs;
+
+  void changeTheme() {
+    isDarkMode.value = !isDarkMode.value;
+    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
+  }
 }
