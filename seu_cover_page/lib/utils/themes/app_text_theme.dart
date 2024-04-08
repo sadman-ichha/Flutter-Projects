@@ -1,0 +1,4 @@
+class AppTextTheme {
+  AppTextTheme._();
+  
+}

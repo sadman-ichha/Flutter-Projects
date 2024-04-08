@@ -123,7 +123,7 @@ class HomeScreen extends StatelessWidget {
                     selectedItem: homeController.selectedDepartmentValue,
                   ),
                   SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                  const Divider(
+                  Divider(
                     color: AppColors.primaryColor,
                   ),
                   SizedBox(height: ScreenSize.screenSize.height * 0.02),
@@ -211,7 +211,7 @@ class HomeScreen extends StatelessWidget {
                     themeController.themeMode == ThemeModeType.dark
                         ? 'Dark Theme'
                         : 'Light Theme',
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
                   InkWell(
                     onTap: () {
@@ -233,7 +233,7 @@ class HomeScreen extends StatelessWidget {
                         'PDF Generate',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.black,
+                          // color: Colors.black,
                           fontSize: 17.0,
                           fontWeight: FontWeight.w500,
                         ),

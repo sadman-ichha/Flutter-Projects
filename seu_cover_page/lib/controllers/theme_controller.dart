@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 enum ThemeModeType { light, dark }
 
-class ThemeController extends GetxController {
+class ThemeController extends GetxService {
   final Rx<ThemeModeType> _themeMode = ThemeModeType.light.obs;
 
   ThemeModeType get themeMode => _themeMode.value;

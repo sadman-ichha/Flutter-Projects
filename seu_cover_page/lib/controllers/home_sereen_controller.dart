@@ -11,7 +11,7 @@ class HomeScreenController extends GetxController {
     'EEE',
     'PHARMACY',
     'ENGLISH',
-    'LAW',
+    'LLB',
     'BANGLA',
     'TEXTILE',
     'ARCHITECHTURE',
@@ -58,7 +58,6 @@ class HomeScreenController extends GetxController {
   //   }
   //   update();
   // }
-
 
   var isDarkMode = false.obs;
 

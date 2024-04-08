@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primaryColor = Colors.amberAccent;
+  static Color primaryColor = Colors.amberAccent;
 }

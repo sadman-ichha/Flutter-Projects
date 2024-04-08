@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: ScreenSize.screenSize.height * 0.03),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: LinearProgressIndicator(color: AppColors.primaryColor),
             ),
