@@ -1,40 +1,32 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum ThemeModeType { light, dark }
+class ThemeController extends GetxController {
+  Rx<ThemeMode> themeMode = ThemeMode.system.obs;
 
-class ThemeController extends GetxService {
-  final Rx<ThemeModeType> _themeMode = ThemeModeType.light.obs;
+  // Function to toggle between light and dark mode
+  void toggleTheme(bool isDarkMode) {
+    themeMode.value = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+    _saveThemeMode(); // Save theme mode
+  }
 
-  ThemeModeType get themeMode => _themeMode.value;
+  // Function to load theme mode from shared preferences
+  Future<void> _loadThemeMode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    ThemeMode savedThemeMode = ThemeMode.values[prefs.getInt('theme_mode') ?? 0];
+    themeMode.value = savedThemeMode;
+  }
+
+  // Function to save theme mode to shared preferences
+  Future<void> _saveThemeMode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('theme_mode', themeMode.value.index);
+  }
 
   @override
   void onInit() {
     super.onInit();
-    _loadThemeMode();
-  }
-
-  void _loadThemeMode() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isDarkMode = prefs.getBool('isDarkMode') ?? false;
-    _setThemeMode(isDarkMode ? ThemeModeType.dark : ThemeModeType.light);
-  }
-
-  void _setThemeMode(ThemeModeType mode) {
-    _themeMode.value = mode;
-    updateStorage(mode);
-  }
-
-  void toggleTheme() {
-    if (_themeMode.value == ThemeModeType.light) {
-      _setThemeMode(ThemeModeType.dark);
-    } else {
-      _setThemeMode(ThemeModeType.light);
-    }
-  }
-
-  void updateStorage(ThemeModeType mode) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isDarkMode', mode == ThemeModeType.dark);
+    _loadThemeMode(); // Load theme mode on initialization
   }
 }

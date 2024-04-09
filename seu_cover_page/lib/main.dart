@@ -5,9 +5,10 @@ import 'package:seu_cover_page/routes/app_pages.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:seu_cover_page/utils/themes/app_colors.dart';
 import 'package:seu_cover_page/utils/themes/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'utils/screen_size.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -32,11 +33,6 @@ class MyApp extends StatelessWidget {
         Locale('bn', 'BD'), // Bangla
       ],
       title: 'SEU Cover Page',
-      // theme: ThemeData(
-      //   appBarTheme: AppBarTheme(
-      //     color: AppColors.primaryColor,
-      //   ),
-      // ),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       themeMode: ThemeMode.system,

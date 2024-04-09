@@ -59,10 +59,5 @@ class HomeScreenController extends GetxController {
   //   update();
   // }
 
-  var isDarkMode = false.obs;
 
-  void changeTheme() {
-    isDarkMode.value = !isDarkMode.value;
-    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
-  }
 }
