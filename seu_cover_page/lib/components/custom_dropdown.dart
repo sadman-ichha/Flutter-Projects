@@ -60,8 +60,9 @@ class CustomDropdownButton extends StatelessWidget {
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
           ),
-          style: const TextStyle(
-            color: Colors.black,
+          style: TextStyle(
+            color: Theme.of(context).focusColor,
+            //color: MediaQuery.of(context).platformBrightness == ThemeMode.dark ? Colors.white : Colors.black,
             fontSize: 16,
           ),
           elevation: 16,

@@ -48,7 +48,8 @@ class MyDrawer extends StatelessWidget {
                 ),
                 const SizedBox(width: 20.0),
                 InkWell(
-                  onTap: () => launchUrl("https://www.linkedin.com/in/sadman-ichha/"),
+                  onTap: () =>
+                      launchUrl("https://www.linkedin.com/in/sadman-ichha/"),
                   child: const CircleAvatar(
                     backgroundImage: AssetImage(AppImages.linkedIn),
                     radius: 15.0,

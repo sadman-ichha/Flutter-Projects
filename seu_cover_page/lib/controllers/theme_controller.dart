@@ -4,29 +4,31 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeController extends GetxController {
   Rx<ThemeMode> themeMode = ThemeMode.system.obs;
-
-  // Function to toggle between light and dark mode
-  void toggleTheme(bool isDarkMode) {
-    themeMode.value = isDarkMode ? ThemeMode.dark : ThemeMode.light;
-    _saveThemeMode(); // Save theme mode
-  }
-
-  // Function to load theme mode from shared preferences
-  Future<void> _loadThemeMode() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    ThemeMode savedThemeMode = ThemeMode.values[prefs.getInt('theme_mode') ?? 0];
-    themeMode.value = savedThemeMode;
-  }
-
-  // Function to save theme mode to shared preferences
-  Future<void> _saveThemeMode() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('theme_mode', themeMode.value.index);
+  RxBool isDark = false.obs;
+  void changeTheme() {
+    isDark.value = !isDark.value;
+    Get.changeThemeMode(isDark.value ? ThemeMode.dark : ThemeMode.light);
   }
 
   @override
   void onInit() {
     super.onInit();
-    _loadThemeMode(); // Load theme mode on initialization
+    _loadThemeFromPrefs(); // Load theme preference on initialization
+  }
+
+  void toggleTheme(bool isDarkMode) {
+    themeMode.value = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+    _saveThemeToPrefs(); // Save theme preference
+  }
+
+  Future<void> _loadThemeFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int themeIndex = prefs.getInt('themeMode') ?? ThemeMode.system.index;
+    themeMode.value = ThemeMode.values[themeIndex];
+  }
+
+  Future<void> _saveThemeToPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('themeMode', themeMode.value.index);
   }
 }

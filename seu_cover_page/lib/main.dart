@@ -9,11 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'utils/screen_size.dart';
 
 void main() async {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isDarkMode = prefs.getBool('isDarkMode') ?? false;
+  runApp(MyApp(isDarkMode: isDarkMode));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isDarkMode;
+
+  const MyApp({Key? key, required this.isDarkMode}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,7 @@ class MyApp extends StatelessWidget {
       title: 'SEU Cover Page',
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
-      themeMode: ThemeMode.system,
+      themeMode: isDarkMode ? ThemeMode.light : ThemeMode.dark,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
     );

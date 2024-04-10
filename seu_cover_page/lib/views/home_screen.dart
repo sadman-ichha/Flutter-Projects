@@ -16,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   // final RxList<String> dropDownItems = ['Assignment', 'Lab Report'].obs;
   @override
   Widget build(BuildContext context) {
+    // Initialize ThemeController
     ThemeController themeController = Get.put(ThemeController());
 
     HomeScreenController homeController = Get.put(HomeScreenController());
@@ -31,26 +32,18 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           // Add download button to the AppBar
-          // Obx(
-          //   () => IconButton(
-          //     icon: themeController.themeMode.value == ThemeMode.light
-          //         ? const Icon(Icons.light_mode)
-          //         : const Icon(Icons.dark_mode),
-          //     onPressed: () {
-          //       //themeController.toggleTheme();
-          //       //homeController.changeTheme();
-          //     },
-          //   ),
-          // ),
-          Obx(() => IconButton(
-            icon: Icon(themeController.themeMode.value == ThemeMode.light
-                ? Icons.light_mode
-                : Icons.dark_mode),
-            onPressed: () {
-              themeController.toggleTheme(
-                  themeController.themeMode.value != ThemeMode.dark);
-            },
-          ),),
+          Obx(
+            () => IconButton(
+              icon: themeController.isDark.value
+                  ? const Icon(Icons.dark_mode)
+                  : const Icon(Icons.light_mode),
+              onPressed: () {
+                //themeController.toggleTheme();
+                //homeController.changeTheme();
+                themeController.changeTheme();
+              },
+            ),
+          ),
 
           // Obx(() {
           //   return Switch(
@@ -73,172 +66,175 @@ class HomeScreen extends StatelessWidget {
 
                 Obx(
                   () => Text(
-                    themeController.themeMode.value == ThemeMode.light
-                        ? "Lightmood"
-                        : 'Dark Mood',
+                    themeController.isDark.value ? 'Dark Mode' : "Light mode",
                   ),
                 ),
 
-                // SizedBox(height: ScreenSize.screenSize.height * 0.03),
-                // CustomDropdownButton(
-                //   items: homeController.dropDownItems,
-                //   selectedItem: homeController.selectedValue,
-                // ),
-                // SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: CustomTextField(
-                //         controller: homeController.courseTitleController,
-                //         labelText: 'Course Title',
-                //         hintText: 'Computer Fundamentals',
-                //       ),
-                //     ),
-                //     const SizedBox(width: 10.0),
-                //     Expanded(
-                //       child: CustomTextField(
-                //         controller: homeController.courseCodeController,
-                //         labelText: 'Course Code',
-                //         hintText: 'CSE141',
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                // CustomTextField(
-                //   controller: homeController.assignmentTitleController,
-                //   labelText: 'Assignment Title',
-                //   hintText: 'Assignment Title',
-                // ),
-                // SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                // CustomTextField(
-                //   controller: homeController.teacherNameController,
-                //   labelText: 'Faculty name',
-                //   hintText: 'e.g: Anawer Parves',
-                // ),
-                // SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                // CustomDropdownButton(
-                //   items: homeController.dropDownDepartmentItems,
-                //   selectedItem: homeController.selectedDepartmentValue,
-                // ),
-                // SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                // Divider(
-                //   color: AppColors.primaryColor,
-                // ),
-                // SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: CustomTextField(
-                //         controller: homeController.nameController,
-                //         labelText: 'Student Name',
-                //         hintText: 'Sadman Esha',
-                //       ),
-                //     ),
-                //     const SizedBox(width: 10.0),
-                //     Expanded(
-                //       child: CustomTextField(
-                //         controller: homeController.idController,
-                //         labelText: 'ID',
-                //         hintText: '2022200010017',
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: CustomTextField(
-                //         controller: homeController.sectionController,
-                //         labelText: 'Section',
-                //         hintText: '5',
-                //       ),
-                //     ),
-                //     const SizedBox(width: 10.0),
-                //     Expanded(
-                //       child: CustomTextField(
-                //         controller: homeController.departmentController,
-                //         labelText: 'Department',
-                //         hintText: 'CSE',
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(height: ScreenSize.screenSize.height * 0.02),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Expanded(
-                //       child: CustomTextField(
-                //         controller: homeController.semesterController,
-                //         labelText: 'Semester',
-                //         hintText: 'Fall 2024',
-                //       ),
-                //     ),
-                //     const SizedBox(width: 10.0),
-                //     Expanded(
-                //       child: Obx(
-                //         () => TextField(
-                //           onTap: () => homeController.showDatePicker(context),
-                //           controller: TextEditingController(
-                //             text: homeController.selectedDate.value != null
-                //                 ? DateFormat('dd/MM/yyyy').format(
-                //                     homeController.selectedDate.value!)
-                //                 : '', // Set the text based on selected date
-                //           ),
-                //           readOnly: true,
-                //           decoration: const InputDecoration(
-                //             border: OutlineInputBorder(),
-                //             labelText: "Date",
-                //             prefixIcon: Icon(Icons.calendar_month),
-                //             prefixIconConstraints:
-                //                 BoxConstraints(minWidth: 40),
-                //             suffixIcon: Icon(Icons.info),
-                //             suffixIconConstraints:
-                //                 BoxConstraints(minWidth: 40),
-                //             contentPadding:
-                //                 EdgeInsets.symmetric(horizontal: 12),
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(height: ScreenSize.screenSize.height * 0.05),
-                // // Text(
-                // //   themeController.themeMode == ThemeModeType.dark
-                // //       ? 'Dark Theme'
-                // //       : 'Light Theme',
-                // //   style: const TextStyle(fontSize: 18),
-                // // ),
-                // InkWell(
-                //   onTap: () {
-                //     // Add your onTap functionality here
-                //     Get.toNamed(Routes.COVER);
-                //   },
-                //   child: Container(
-                //     width: double.infinity,
-                //     decoration: BoxDecoration(
-                //       border: Border.all(
-                //         color: Colors.amberAccent,
-                //         width: 3.0,
-                //       ),
-                //       //color: Colors.red,
-                //       borderRadius: BorderRadius.circular(8.0),
-                //     ),
-                //     padding: const EdgeInsets.all(12.0),
-                //     child: const Text(
-                //       'PDF Generate',
-                //       textAlign: TextAlign.center,
-                //       style: TextStyle(
-                //         // color: Colors.black,
-                //         fontSize: 17.0,
-                //         fontWeight: FontWeight.w500,
-                //       ),
-                //     ),
+                //       Obx(
+                //   () => Text(
+                //     Get.isDarkMode ? 'Dark Mode' : 'Light Mode',
+                //     style: TextStyle(fontSize: 24),
                 //   ),
-                // )
+                // ),
+
+                SizedBox(height: ScreenSize.screenSize.height * 0.03),
+                CustomDropdownButton(
+                  items: homeController.dropDownItems,
+                  selectedItem: homeController.selectedValue,
+                ),
+                SizedBox(height: ScreenSize.screenSize.height * 0.02),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        controller: homeController.courseTitleController,
+                        labelText: 'Course Title',
+                        hintText: 'Computer Fundamentals',
+                      ),
+                    ),
+                    const SizedBox(width: 10.0),
+                    Expanded(
+                      child: CustomTextField(
+                        controller: homeController.courseCodeController,
+                        labelText: 'Course Code',
+                        hintText: 'CSE141',
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: ScreenSize.screenSize.height * 0.02),
+                CustomTextField(
+                  controller: homeController.assignmentTitleController,
+                  labelText: 'Assignment Title',
+                  hintText: 'Assignment Title',
+                ),
+                SizedBox(height: ScreenSize.screenSize.height * 0.02),
+                CustomTextField(
+                  controller: homeController.teacherNameController,
+                  labelText: 'Faculty name',
+                  hintText: 'e.g: Anawer Parves',
+                ),
+                SizedBox(height: ScreenSize.screenSize.height * 0.02),
+                CustomDropdownButton(
+                  items: homeController.dropDownDepartmentItems,
+                  selectedItem: homeController.selectedDepartmentValue,
+                ),
+                SizedBox(height: ScreenSize.screenSize.height * 0.02),
+                Divider(
+                  color: AppColors.primaryColor,
+                ),
+                SizedBox(height: ScreenSize.screenSize.height * 0.02),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        controller: homeController.nameController,
+                        labelText: 'Student Name',
+                        hintText: 'Sadman Esha',
+                      ),
+                    ),
+                    const SizedBox(width: 10.0),
+                    Expanded(
+                      child: CustomTextField(
+                        controller: homeController.idController,
+                        labelText: 'ID',
+                        hintText: '2022200010017',
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: ScreenSize.screenSize.height * 0.02),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        controller: homeController.sectionController,
+                        labelText: 'Section',
+                        hintText: '5',
+                      ),
+                    ),
+                    const SizedBox(width: 10.0),
+                    Expanded(
+                      child: CustomTextField(
+                        controller: homeController.departmentController,
+                        labelText: 'Department',
+                        hintText: 'CSE',
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: ScreenSize.screenSize.height * 0.02),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        controller: homeController.semesterController,
+                        labelText: 'Semester',
+                        hintText: 'Fall 2024',
+                      ),
+                    ),
+                    const SizedBox(width: 10.0),
+                    Expanded(
+                      child: Obx(
+                        () => TextField(
+                          onTap: () => homeController.showDatePicker(context),
+                          controller: TextEditingController(
+                            text: homeController.selectedDate.value != null
+                                ? DateFormat('dd/MM/yyyy')
+                                    .format(homeController.selectedDate.value!)
+                                : '', // Set the text based on selected date
+                          ),
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Date",
+                            prefixIcon: Icon(Icons.calendar_month),
+                            prefixIconConstraints: BoxConstraints(minWidth: 40),
+                            suffixIcon: Icon(Icons.info),
+                            suffixIconConstraints: BoxConstraints(minWidth: 40),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 12),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: ScreenSize.screenSize.height * 0.05),
+                // Text(
+                //   themeController.themeMode == ThemeModeType.dark
+                //       ? 'Dark Theme'
+                //       : 'Light Theme',
+                //   style: const TextStyle(fontSize: 18),
+                // ),
+                InkWell(
+                  onTap: () {
+                    // Add your onTap functionality here
+                    Get.toNamed(Routes.COVER);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.amberAccent,
+                        width: 3.0,
+                      ),
+                      //color: Colors.red,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    padding: const EdgeInsets.all(12.0),
+                    child: const Text(
+                      'PDF Generate',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        // color: Colors.black,
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),

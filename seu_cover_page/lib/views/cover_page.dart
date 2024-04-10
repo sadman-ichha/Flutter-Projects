@@ -48,7 +48,7 @@ class CoverPageScreen extends StatelessWidget {
         ),
         centerTitle: true,
         //foregroundColor: AppColors.primaryColor,
-        backgroundColor: AppColors.primaryColor,
+        //backgroundColor: AppColors.primaryColor,
       ),
       body: SafeArea(
         child: PdfPreview(
@@ -57,7 +57,6 @@ class CoverPageScreen extends StatelessWidget {
           build: generatePDF,
           onPrinted: showPrintedToast(),
           onShared: showSharedToast(),
-        
         ),
       ),
     );

@@ -7,10 +7,11 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     colorScheme: const ColorScheme.light(),
-    primaryColor: Colors.purple,
+    primaryColor: Colors.blue,
     brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.white,
     textTheme: AppTextTheme.lightTextTheme,
+    focusColor: Colors.black,
     appBarTheme: AppBarTheme(
       color: AppColors.primaryColor,
     ),
@@ -18,9 +19,15 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     colorScheme: const ColorScheme.dark(),
-    primaryColor: Colors.purple,
+    primaryColor: Colors.blue,
     brightness: Brightness.dark,
+    focusColor: Colors.white,
     scaffoldBackgroundColor: Colors.black,
     textTheme: AppTextTheme.darkTextTheme,
+    
+    // dropdownMenuTheme: const DropdownMenuThemeData(
+    //   inputDecorationTheme: InputDecorationTheme(fillColor: Colors.white),
+    //   textStyle: TextStyle(color: Colors.white),
+    // ),
   );
 }
