@@ -27,7 +27,7 @@ class MyDrawer extends StatelessWidget {
                 backgroundColor: Colors.blue,
                 child: CircleAvatar(
                   radius: 34.0,
-                  backgroundImage: AssetImage(AppImages.profilepic),
+                  backgroundImage: AssetImage(AppImages.profilepic) ,
                 ),
               ),
             ),
