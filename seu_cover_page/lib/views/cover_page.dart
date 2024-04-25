@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:seu_cover_page/components/coverpage_all_component.dart';
+import 'package:seu_cover_page/utils/helpers/helper_functions.dart';
 import 'package:seu_cover_page/utils/themes/app_colors.dart';
 
 class CoverPageScreen extends StatelessWidget {
@@ -52,11 +53,21 @@ class CoverPageScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: PdfPreview(
-          maxPageWidth: 700.0,
+          maxPageWidth: double.infinity,
           actions: actions,
           build: generatePDF,
-          onPrinted: showPrintedToast(),
-          onShared: showSharedToast(),
+          canChangePageFormat: false,
+          canChangeOrientation: false,
+          canDebug: false,
+          loadingWidget: CircularProgressIndicator(
+            color: AppHelperFunctions.isDarkMode(context)
+                ? Colors.teal
+                : AppColors.buttonSecondary,
+          ),
+          previewPageMargin: const EdgeInsets.symmetric(
+            horizontal: 6,
+            vertical: 8,
+          ),
         ),
       ),
     );

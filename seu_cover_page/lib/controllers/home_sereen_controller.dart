@@ -3,6 +3,13 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';
 
 class HomeScreenController extends GetxController {
+  // final localStorage = InfoLocalStorage();
+  // @override
+  // void onInit() {
+  //   localStorage.loadSavedData();
+  //   super.onInit();
+  // }
+
   final selectedValue = 'Assignment'.obs; // Initial value
   final RxList<String> dropDownItems = ['Assignment', 'Lab Report'].obs;
   final selectedDepartmentValue = 'CSE'.obs; // Initial value
@@ -35,18 +42,6 @@ class HomeScreenController extends GetxController {
     }
   }
 
-  final TextEditingController courseTitleController = TextEditingController();
-
-  final TextEditingController courseCodeController = TextEditingController();
-  final TextEditingController assignmentTitleController =
-      TextEditingController();
-  final TextEditingController teacherNameController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController idController = TextEditingController();
-  final TextEditingController sectionController = TextEditingController();
-  final TextEditingController departmentController = TextEditingController();
-  final TextEditingController semesterController = TextEditingController();
-
   // var isDark = false;
   // void changeTheme(state) {
   //   if (state == true) {
@@ -58,6 +53,4 @@ class HomeScreenController extends GetxController {
   //   }
   //   update();
   // }
-
-
 }

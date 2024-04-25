@@ -1,43 +1,7 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-
-// class CustomDropdownButton extends StatelessWidget {
-//   CustomDropdownButton({Key? key}) : super(key: key);
-
-//   final RxList<String> dropDownItems = ['Assignment', 'Lab Report'].obs;
-//   final selectedValue = 'Assignment'.obs; // Initial value
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return DropdownButtonFormField<String>(
-//       isExpanded: true,
-//       value: selectedValue.value,
-//       onChanged: (String? newValue) {
-//         selectedValue.value = newValue!;
-//       },
-//       decoration: const InputDecoration(
-//         border: OutlineInputBorder(),
-//       ),
-//       style: const TextStyle(
-//         color: Colors.black,
-//         fontSize: 16,
-//       ),
-//       elevation: 16,
-//       items: dropDownItems.map<DropdownMenuItem<String>>((String value) {
-//         return DropdownMenuItem<String>(
-//           value: value,
-//           child: Padding(
-//             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//             child: Text(value),
-//           ),
-//         );
-//       }).toList(),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seu_cover_page/utils/helpers/helper_functions.dart';
+import 'package:seu_cover_page/utils/themes/app_colors.dart';
 
 class CustomDropdownButton extends StatelessWidget {
   final RxList<String> items;
@@ -51,6 +15,7 @@ class CustomDropdownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = AppHelperFunctions.isDarkMode(context);
     return Obx(() => DropdownButtonFormField<String>(
           isExpanded: true,
           value: selectedItem.value,
@@ -60,16 +25,17 @@ class CustomDropdownButton extends StatelessWidget {
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
           ),
-          style: TextStyle(
-            color: Theme.of(context).focusColor,
-            //color: MediaQuery.of(context).platformBrightness == ThemeMode.dark ? Colors.white : Colors.black,
-            fontSize: 16,
-          ),
+          style: Theme.of(context).textTheme.bodyLarge,
           elevation: 16,
           items: items.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value),
+              child: Text(
+                value,
+                style: TextStyle(
+                  color: isDark ? AppColors.softGrey : Colors.grey.shade800,
+                ),
+              ),
             );
           }).toList(),
         ));

@@ -6,7 +6,7 @@ import 'package:seu_cover_page/views/splash_screen.dart';
 
 class AppPages {
   AppPages._();
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH;
 
   static final List<GetPage<dynamic>> routes = [
     GetPage(
@@ -15,7 +15,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.HOME,
-      page: () => const HomeScreen(),
+      page: () => HomeScreen(),
     ),
     GetPage(
       name: Routes.COVER,

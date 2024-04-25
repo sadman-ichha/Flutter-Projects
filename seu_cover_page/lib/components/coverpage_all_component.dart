@@ -8,12 +8,17 @@ import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
 import 'package:printing/printing.dart';
 import 'package:seu_cover_page/components/rich_text_cover_page.dart';
+import 'package:seu_cover_page/controllers/form/form_controller.dart';
 import 'package:seu_cover_page/controllers/home_sereen_controller.dart';
 import 'package:seu_cover_page/utils/themes/app_images.dart';
 
+import '../controllers/form/date_controller.dart';
+
 HomeScreenController homeController = Get.put(HomeScreenController());
+final form = FormController.instance;
 
 Future<Uint8List> generatePDF(final PdfPageFormat format) async {
+  final dateController = DateController.instance;
   // Create a PDF document
   final pdf = pw.Document();
   // Load image from asset
@@ -76,8 +81,7 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                     font: pw.Font.helveticaBold(),
                   ),
                   //dynamicText: "Assignment 1",
-                  dynamicText:
-                      homeController.assignmentTitleController.text.toString(),
+                  dynamicText: form.assignmentTitleController.text.toString(),
                   textStyle: pw.TextStyle(
                     fontSize: 22.0,
                     font: pw.Font.helveticaBold(),
@@ -88,8 +92,7 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 PdfRichText(
                   title: "Course Title: ",
                   //  dynamicText: "Algorithm",
-                  dynamicText:
-                      homeController.courseTitleController.text.toString(),
+                  dynamicText: form.courseTitleController.text.toString(),
                   textStyle: pw.TextStyle(
                     fontSize: 22.0,
                     font: pw.Font.helveticaBold(),
@@ -104,8 +107,7 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                     font: pw.Font.helveticaBold(),
                   ),
                   //dynamicText: "CSE 161",
-                  dynamicText:
-                      homeController.courseCodeController.text.toString(),
+                  dynamicText: form.courseCodeController.text.toString(),
                   textStyle: pw.TextStyle(
                     fontSize: 22.0,
                     font: pw.Font.helveticaBold(),
@@ -125,7 +127,7 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                 pw.SizedBox(height: 3.0),
                 pw.Text(
                   // 'Anawer Perves',
-                  homeController.teacherNameController.text.toString(),
+                  form.teacherNameController.text.toString(),
                   style: pw.TextStyle(
                     fontSize: 22.0,
                     font: pw.Font.helveticaBold(),
@@ -157,7 +159,7 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                     font: pw.Font.helveticaBold(),
                   ),
                   // dynamicText: "Md. Safi Sadman Esha",
-                  dynamicText: homeController.nameController.text.toString(),
+                  dynamicText: form.nameController.text.toString(),
                   textStyle: pw.TextStyle(
                     fontSize: 22.0,
                     fontWeight: pw.FontWeight.normal,
@@ -170,7 +172,7 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                     font: pw.Font.helveticaBold(),
                   ),
                   //dynamicText: "2022200010017",
-                  dynamicText: homeController.idController.text.toString(),
+                  dynamicText: form.idController.text.toString(),
                   textStyle: const pw.TextStyle(fontSize: 22.0),
                 ),
                 PdfRichText(
@@ -180,7 +182,7 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                     font: pw.Font.helveticaBold(),
                   ),
                   //dynamicText: "16",
-                  dynamicText: homeController.sectionController.text.toString(),
+                  dynamicText: form.sectionController.text.toString(),
                   textStyle: const pw.TextStyle(fontSize: 22.0),
                 ),
                 PdfRichText(
@@ -190,8 +192,7 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                     font: pw.Font.helveticaBold(),
                   ),
                   //dynamicText: "FALL 2024",
-                  dynamicText:
-                      homeController.semesterController.text.toString(),
+                  dynamicText: form.semesterController.text.toString(),
                   textStyle: const pw.TextStyle(fontSize: 22.0),
                 ),
                 PdfRichText(
@@ -201,27 +202,49 @@ Future<Uint8List> generatePDF(final PdfPageFormat format) async {
                     font: pw.Font.helveticaBold(),
                   ),
                   //dynamicText: "CSE",
-                  dynamicText:
-                      homeController.departmentController.text.toString(),
+                  dynamicText: form.departmentController.text.toString(),
                   textStyle: const pw.TextStyle(fontSize: 22.0),
                 ),
 
                 pw.Spacer(),
 
                 // Submitted by
-                PdfRichText(
-                  title: "Submission Date: ",
-                  titleTextStyle: pw.TextStyle(
-                    fontSize: 22.0,
-                    font: pw.Font.helveticaBold(),
-                  ),
-                  // dynamicText: "26/04/2024",
-                  dynamicText: homeController.selectedDate.value == null
-                      ? ""
-                      : "${homeController.selectedDate.value!.day.toString()}/${homeController.selectedDate.value!.month.toString()}/${homeController.selectedDate.value!.year.toString()}",
-                  textStyle: pw.TextStyle(
-                    fontSize: 22.0,
-                    font: pw.Font.helveticaBold(),
+                // PdfRichText(
+                //   title: "Submission Date: ",
+                //   titleTextStyle: pw.TextStyle(
+                //     fontSize: 22.0,
+                //     font: pw.Font.helveticaBold(),
+                //   ),
+                //   // dynamicText: homeController.selectedDate.value == null
+                //   //     ? ""
+                //   //     : "${homeController.selectedDate.value!.day.toString()}/${homeController.selectedDate.value!.month.toString()}/${homeController.selectedDate.value!.year.toString()}",
+
+                //   dynamicText: DateController.instance.submissionDateController.value == null
+                //       ? ""
+                //       : "${homeController.selectedDate.value!.day.toString()}/${homeController.selectedDate.value!.month.toString()}/${homeController.selectedDate.value!.year.toString()}",
+
+                //   textStyle: pw.TextStyle(
+                //     fontSize: 22.0,
+                //     font: pw.Font.helveticaBold(),
+                //   ),
+                // ),
+                pw.RichText(
+                  text: pw.TextSpan(
+                    text: 'Submission Date : ',
+                    style: pw.TextStyle(
+                      fontSize: 22.0,
+                      font: pw.Font.helveticaBold(),
+                    ),
+                    children: [
+                      pw.TextSpan(
+                        text:
+                            dateController.submissionDateController.text.trim(),
+                        style: pw.TextStyle(
+                          fontSize: 22.0,
+                          font: pw.Font.helveticaBold(),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

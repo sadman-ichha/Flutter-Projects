@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:seu_cover_page/components/url_launcher.dart';
 import 'package:seu_cover_page/utils/responsive_text.dart';
 import 'package:seu_cover_page/utils/screen_size.dart';
 import 'package:seu_cover_page/utils/themes/app_images.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -27,7 +27,7 @@ class MyDrawer extends StatelessWidget {
                 backgroundColor: Colors.blue,
                 child: CircleAvatar(
                   radius: 34.0,
-                  backgroundImage: AssetImage(AppImages.profilepic) ,
+                  backgroundImage: AssetImage(AppImages.profilepic),
                 ),
               ),
             ),
@@ -43,13 +43,20 @@ class MyDrawer extends StatelessWidget {
             Row(
               children: [
                 InkWell(
-                  onTap: () => launchUrl('mailto:sadmanichha@gmail.com'),
+                  onTap: () => launchUrl(
+                    Uri.parse("mailto:sadmanichha@gmail.com"),
+                  ),
                   child: const Icon(Icons.mail, size: 30.0),
                 ),
                 const SizedBox(width: 20.0),
                 InkWell(
-                  onTap: () =>
-                      launchUrl("https://www.linkedin.com/in/sadman-ichha/"),
+                  onTap: () {
+                    launchUrl(
+                      Uri.parse("https://www.linkedin.com/in/sadman-ichha/"),
+                    );
+                  },
+                  // onTap: () =>
+                  //     launchUrl("https://www.linkedin.com/in/sadman-ichha/"),
                   child: const CircleAvatar(
                     backgroundImage: AssetImage(AppImages.linkedIn),
                     radius: 15.0,
@@ -57,7 +64,9 @@ class MyDrawer extends StatelessWidget {
                 ),
                 const SizedBox(width: 20.0),
                 InkWell(
-                  onTap: () => launchUrl("https://github.com/sadman-ichha"),
+                  onTap: () => launchUrl(
+                    Uri.parse("https://github.com/sadman-ichha"),
+                  ),
                   child: const CircleAvatar(
                     backgroundImage: AssetImage(AppImages.github),
                     radius: 15.0,
