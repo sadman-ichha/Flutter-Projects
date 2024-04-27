@@ -1,4 +1,4 @@
-package com.example.seu_cover_page
+package com.seu.cover.page
 
 import io.flutter.embedding.android.FlutterActivity
 
